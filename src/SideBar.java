@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class SideBar extends MainPanel implements ActionListener {
 
@@ -62,12 +65,26 @@ public class SideBar extends MainPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        if (e.getSource() == createTask) {
            String taskName = JOptionPane.showInputDialog("Please enter the task name");
-           mainPanel.addTask(taskName);
+           try {
+               mainPanel.addTask(taskName);
+           } catch (IOException ex) {
+               throw new RuntimeException(ex);
+           }
        }else if (e.getSource() == exportTask) {
            System.out.println("Tasks exported!");
        }else if (e.getSource() == clearTask) {
            mainPanel.removeAll();
            mainPanel.repaint();
+           File f = new File("config.txt");
+
+           if (f.isFile()) {
+               try {
+                   FileWriter fw = new FileWriter("config.txt");
+                   fw.write("");
+               } catch (IOException ex) {
+                   throw new RuntimeException(ex);
+               }
+           }
        }
     }
 }
