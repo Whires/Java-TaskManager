@@ -7,6 +7,7 @@ public class SideBar extends MainPanel implements ActionListener {
 
     JButton createTask;
     JButton exportTask;
+    JButton clearTask;
     MainPanel mainPanel;
 
     SideBar (MainPanel mainPanel) {
@@ -42,6 +43,18 @@ public class SideBar extends MainPanel implements ActionListener {
         gbc.gridy = 1;
 
         this.add(exportTask, gbc);
+
+        clearTask = new JButton("Clear tasks");
+        clearTask.setFocusable(false);
+        clearTask.addActionListener(this);
+        clearTask.setBackground(new Color(33, 42, 55));
+        clearTask.setForeground(Color.WHITE);
+        clearTask.setFont(new Font("Roboto", Font.BOLD, 20));
+        clearTask.setBorderPainted(false);
+
+        gbc.gridy = 2;
+
+        this.add(clearTask, gbc);
     }
 
 
@@ -50,9 +63,11 @@ public class SideBar extends MainPanel implements ActionListener {
        if (e.getSource() == createTask) {
            String taskName = JOptionPane.showInputDialog("Please enter the task name");
            mainPanel.addTask(taskName);
-
        }else if (e.getSource() == exportTask) {
            System.out.println("Tasks exported!");
+       }else if (e.getSource() == clearTask) {
+           mainPanel.removeAll();
+           mainPanel.repaint();
        }
     }
 }
