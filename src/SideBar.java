@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 public class SideBar extends MainPanel implements ActionListener {
 
@@ -60,14 +61,19 @@ public class SideBar extends MainPanel implements ActionListener {
         this.add(clearTask, gbc);
     }
 
+    public void skip () {}
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
        if (e.getSource() == createTask) {
            String taskName = JOptionPane.showInputDialog("Please enter the task name");
+
            try {
                mainPanel.addTask(taskName);
            } catch (IOException ex) {
+               throw new RuntimeException(ex);
+           } catch (InterruptedException ex) {
                throw new RuntimeException(ex);
            }
        }else if (e.getSource() == exportTask) {
