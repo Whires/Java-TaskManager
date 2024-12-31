@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Scanner;
 
 public class MainPanel extends JPanel {
 
@@ -34,4 +35,4 @@ public class MainPanel extends JPanel {
         fileWriter.write(taskName + "\n");
         fileWriter.close();
     }
-}
+        }

@@ -5,12 +5,11 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.stream.Stream;
 
 public class SideBar extends MainPanel implements ActionListener {
 
     JButton createTask;
-    JButton exportTask;
+    JButton restoreTask;
     JButton clearTask;
     MainPanel mainPanel;
 
@@ -36,18 +35,6 @@ public class SideBar extends MainPanel implements ActionListener {
 
         this.add(createTask, gbc);
 
-        exportTask = new JButton("Export tasks");
-        exportTask.setFocusable(false);
-        exportTask.addActionListener(this);
-        exportTask.setBackground(new Color(33, 42, 55));
-        exportTask.setForeground(Color.WHITE);
-        exportTask.setFont(new Font("Roboto", Font.BOLD, 20));
-        exportTask.setBorderPainted(false);
-
-        gbc.gridy = 1;
-
-        this.add(exportTask, gbc);
-
         clearTask = new JButton("Clear tasks");
         clearTask.setFocusable(false);
         clearTask.addActionListener(this);
@@ -56,13 +43,10 @@ public class SideBar extends MainPanel implements ActionListener {
         clearTask.setFont(new Font("Roboto", Font.BOLD, 20));
         clearTask.setBorderPainted(false);
 
-        gbc.gridy = 2;
+        gbc.gridy = 1;
 
         this.add(clearTask, gbc);
     }
-
-    public void skip () {}
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -76,8 +60,6 @@ public class SideBar extends MainPanel implements ActionListener {
            } catch (InterruptedException ex) {
                throw new RuntimeException(ex);
            }
-       }else if (e.getSource() == exportTask) {
-           System.out.println("Tasks exported!");
        }else if (e.getSource() == clearTask) {
            mainPanel.removeAll();
            mainPanel.repaint();

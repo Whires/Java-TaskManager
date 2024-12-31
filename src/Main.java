@@ -3,8 +3,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        //Scanner sc = new Scanner(fw);
+    MainPanel mainPanel;
+    public static void main(String[] args) throws FileNotFoundException {
         Frame frame = new Frame("Whires - Task manager!");
     }
 }
