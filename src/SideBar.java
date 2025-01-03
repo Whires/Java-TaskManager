@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static javax.swing.JOptionPane.*;
+
 public class SideBar extends MainPanel implements ActionListener {
 
     JButton createTask;
@@ -51,7 +53,7 @@ public class SideBar extends MainPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
        if (e.getSource() == createTask) {
-           String taskName = JOptionPane.showInputDialog("Please enter the task name");
+           String taskName = showInputDialog("Please enter the task name");
 
            try {
                mainPanel.addTask(taskName);
@@ -61,18 +63,11 @@ public class SideBar extends MainPanel implements ActionListener {
                throw new RuntimeException(ex);
            }
        }else if (e.getSource() == clearTask) {
-           mainPanel.removeAll();
-           mainPanel.repaint();
-           File f = new File("config.txt");
-
-           if (f.isFile()) {
-               try {
-                   FileWriter fw = new FileWriter("config.txt");
-                   fw.write("");
-               } catch (IOException ex) {
-                   throw new RuntimeException(ex);
+           int a = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete everything?", null, JOptionPane.YES_NO_OPTION);
+           if (a == JOptionPane.YES_OPTION) {
+               mainPanel.removeAll();
+               mainPanel.repaint();
                }
            }
        }
     }
-}

@@ -22,17 +22,16 @@ public class MainPanel extends JPanel {
         this.repaint();
 
         checkBox.addActionListener((e -> {
-            this.remove(checkBox);
-            this.repaint();
+            int ans = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this task?", null, JOptionPane.YES_NO_OPTION);
+            if (ans == JOptionPane.YES_OPTION) {
+                this.remove(checkBox);
+                this.repaint();
+            }
         }));
 
         if (taskName == null || taskName.equals("")) {
             this.remove(checkBox);
             this.repaint();
         }
-
-        FileWriter fileWriter = new FileWriter("config.txt", true);
-        fileWriter.write(taskName + "\n");
-        fileWriter.close();
     }
         }
